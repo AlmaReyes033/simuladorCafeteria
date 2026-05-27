@@ -6,22 +6,47 @@ using System.Threading.Tasks;
 
 namespace simuladorCafeteria
 {
-    public class Bebida
+    internal class Bebida
     {
-        private string nombre;
-        private string tamaño;
-        private double precio;
+        protected string Nombre;
+        protected string Tamaño;
+        protected double Precio;
 
+
+        public string nombre
+        {
+            get { return Nombre; }
+            set { Nombre = value; }
+        }
+        public string tamaño
+        {
+            get { return Tamaño;}
+            set { Tamaño = value; }
+        }
+        public  double precio
+        {
+            get { return Precio; }
+            set {
+                if (value>0)
+                Precio = value; }
+        }
         public Bebida(string nombre, string tamaño, double precio)
         {
-            this.nombre = nombre;
-            this.tamaño = tamaño;
-            this.precio = precio;
+            this.Nombre = nombre;
+            this.Tamaño = tamaño;
+            this.Precio = precio;
         }
 
-        public void Preparar()
+        public Bebida()
         {
-            Console.WriteLine(" se esta preparando un " + nombre + " de tamaño " + tamaño);
+            Nombre = "";
+            Tamaño = "";
+            Precio = 0.0f;
+        }
+
+        public virtual string Preparar()
+        {
+            return " Estamos preparando un: " + Nombre + " de tamaño " + Tamaño;
         }
 
         public void aplicaDescuento(double porcentaje)
@@ -29,9 +54,10 @@ namespace simuladorCafeteria
             double descuento = precio * (porcentaje / 100);
             precio = precio - descuento;
         }
-        public void mostrarDatos()
+
+        public virtual string mostrarDatos()
         {
-            Console.WriteLine("esto es un " + nombre + " de tamaño " + tamaño + " con un costo de " + precio + "\n");
+            return "esto es un " + nombre + " de tamaño " + tamaño + " con un costo de " + precio + "\n";
         }
             
     }

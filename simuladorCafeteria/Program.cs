@@ -4,58 +4,43 @@
     {
         static void Main(string[] args)
         {
-            //Bebida 1
-            Console.Write("Ingresa el nombre de la Bebida 1: ");
-            string nombre1 = Console.ReadLine();
+            List<Bebida> Pedido = new List<Bebida>();
 
-            Console.Write("Ingresa el tamaño: ");
-            string tamaño1 = Console.ReadLine();
+         
+            Pedido.Add(new BebidaCaliente("Chocolate", "Mediano", 90.5f, 45.00f));
+            Pedido.Add(new BebidaFria("Limonada", "Grande", 35, 5));
+            Pedido.Add(new BebidaCaliente("Matcha latte", "Chico", 35.0f, 30.00f));
+            Pedido.Add(new BebidaFria("Frappe de cafe", "Mediano", 60, 4));
+            Pedido.Add(new BebidaCaliente("Cafe Americano", "Chico", 50.0f, 89.00f));
 
-            Console.Write("Ingresa el precio: ");
-            double precio1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("=== TICKET DE BARRA ===\n");
 
-            Bebida bebida1 = new Bebida(nombre1, tamaño1, precio1);
+            double Costo_Total = 0;
 
-            //Bebida 2
-            Console.Write("Ingresa el nombre de la Bebida 2: ");
-            string nombre2 = Console.ReadLine();
+            // Recorrer la lista
+            foreach (Bebida b in Pedido)
+            {
+               
+                Console.WriteLine(b.Preparar());
+                
+                if (b is BebidaCaliente caliente)
+                {
+                
+                    if (caliente.temperatura > 88)
+                    {
+                        Console.WriteLine("   [!] ADVERTENCIA: ¡Cuidado, bebida muy caliente!");
+                    }
+                }
 
-            Console.Write("Ingresa el tamaño: ");
-            string tamaño2 = Console.ReadLine();
+                Costo_Total = Costo_Total + b.precio;
 
-            Console.Write("Ingresa el precio: ");
-            double precio2 = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("\n");
+            }
 
-            Bebida bebida2 = new Bebida(nombre2, tamaño2, precio2);
+            Console.WriteLine("\nTotal a pagar: $" + Costo_Total);
 
-            //Bebida 3
-            Console.Write("Ingresa el nombre de la Bebida 3: ");
-            string nombre3 = Console.ReadLine();
-
-            Console.Write("Ingresa el tamaño: ");
-            string tamaño3 = Console.ReadLine();
-
-            Console.Write("Ingresa el precio: ");
-            double precio3 = Convert.ToDouble(Console.ReadLine());
-
-            Bebida bebida3 = new Bebida(nombre3, tamaño3, precio3);
-
-            Console.WriteLine("Aplicando un 15% de descuento a la Bebida 3 \n");
-            bebida3.aplicaDescuento(15);
-
-            Console.WriteLine("Resumen del Pedido\n");
-
-            // bebida 1
-            bebida1.Preparar();
-            bebida1.mostrarDatos();
-
-            //bebida 2
-            bebida2.Preparar();
-            bebida2.mostrarDatos();
-
-            //bebida 3
-            bebida3.Preparar();
-            bebida3.mostrarDatos();
+            Console.ReadLine();
         }
     }
+    
 }
